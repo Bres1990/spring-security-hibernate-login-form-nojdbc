@@ -1,19 +1,12 @@
 package com.bres.siodme.web.controller;
 
-import com.bres.siodme.web.model.User;
-import com.bres.siodme.web.service.SecurityService;
-import com.bres.siodme.web.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.validation.Valid;
+import java.sql.SQLException;
 
 
 /**
@@ -23,41 +16,36 @@ import javax.validation.Valid;
 @Controller
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class LoginController {
-    @Autowired
-    private UserService userService;
 
-    @Autowired
-    private SecurityService securityService;
-
-//    @Autowired //@Qualifier("userValidator")
-//    private UserValidator userValidator;
-
-    @Autowired
-    private UserDetailsService userDetails;
-
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model) {
-        model.addAttribute("userForm", new User());
-
-        return "registration";
-    }
-
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult) {
-        //userValidator.validate(userForm, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
-
-        userService.save(userForm);
-        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
-
-        return "redirect:/welcome";
-    }
+//    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+//    public String registration(Model model) {
+//        model.addAttribute("userForm", new User());
+//
+//        return "registration";
+//    }
+//
+//    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+//    public String registration(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult) {
+//        //userValidator.validate(userForm, bindingResult);
+//
+//        if (bindingResult.hasErrors()) {
+//            return "registration";
+//        }
+//
+//        userService.save(userForm);
+//        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+//
+//        return "redirect:/welcome";
+//    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
+    public String login(Model model, String error, String logout) throws SQLException {
+//        Connection con = null;
+//        con = DriverManager.getConnection("jdbc:hsqldb:file:C:/Users/Adam/IdeaProjects/Sagiton_6/src/main/resources/db"
+//                , "root", "bres");
+
+//        userRepository.save(new User("ADMINISTRATOR", "administration"));
+//        userRepository.save(new User("username", "password"));
 
         if (error != null)
             model.addAttribute("error", "Your username and password is invalid.");

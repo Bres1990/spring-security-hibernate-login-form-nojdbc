@@ -11,21 +11,28 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "user")
+@Table(name = "Users")
 public class User {
+    @Column(name = "id")
     private Long id;
 
-
     @Size(min=6, max=32, message="Username must fit between 6 and 32 letters") @NotEmpty
-    @Column
+    @Column(name = "username")
     private String username;
 
+    @Column(name = "password")
     @Size(min=8, max=32, message="Password must fit between 8 and 32 letters") @NotEmpty
     private String password;
 
     private String passwordConfirm;
-
     private Set<Role> roles;
+
+    protected User() {};
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
