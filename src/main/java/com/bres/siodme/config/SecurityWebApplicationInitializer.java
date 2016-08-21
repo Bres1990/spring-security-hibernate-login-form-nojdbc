@@ -6,7 +6,4 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
  * Created by Adam on 2016-08-14.
  */
 public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
-//    protected String getDispatcherWebApplicationContextSuffix(){
-//        return "dispatcher";
-//    }
 }

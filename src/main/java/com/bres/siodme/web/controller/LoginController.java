@@ -17,35 +17,9 @@ import java.sql.SQLException;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class LoginController {
 
-//    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-//    public String registration(Model model) {
-//        model.addAttribute("userForm", new User());
-//
-//        return "registration";
-//    }
-//
-//    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-//    public String registration(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult) {
-//        //userValidator.validate(userForm, bindingResult);
-//
-//        if (bindingResult.hasErrors()) {
-//            return "registration";
-//        }
-//
-//        userService.save(userForm);
-//        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
-//
-//        return "redirect:/welcome";
-//    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) throws SQLException {
-//        Connection con = null;
-//        con = DriverManager.getConnection("jdbc:hsqldb:file:C:/Users/Adam/IdeaProjects/Sagiton_6/src/main/resources/db"
-//                , "root", "bres");
-
-//        userRepository.save(new User("ADMINISTRATOR", "administration"));
-//        userRepository.save(new User("username", "password"));
 
         if (error != null)
             model.addAttribute("error", "Your username and password is invalid.");

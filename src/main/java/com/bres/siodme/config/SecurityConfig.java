@@ -3,6 +3,7 @@ package com.bres.siodme.config;
 /**
  * Created by Adam on 2016-08-02.
  */
+
 import com.bres.siodme.web.security.MySimpleUrlAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired private UserDetailsService userDetailsService;
 
     @Autowired public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordencoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean(name="authenticationManager")
@@ -35,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean(name="bCryptPasswordEncoder")
-    public BCryptPasswordEncoder passwordencoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

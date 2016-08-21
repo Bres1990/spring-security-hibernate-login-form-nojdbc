@@ -1,7 +1,6 @@
 package com.bres.siodme.web.security;
 
 
-import com.bres.siodme.web.model.Role;
 import com.bres.siodme.web.service.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.Collection;
-import java.util.Set;
 
 /**
  * Created by Adam on 2016-08-01.
