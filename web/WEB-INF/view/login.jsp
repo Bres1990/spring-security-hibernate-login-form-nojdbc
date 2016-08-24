@@ -41,6 +41,8 @@
             <input name="password" type="password" class="form-control" placeholder="Password"/>
             <span>${error}</span>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input id="remember-me" name="remember-me" type="checkbox" />
+            <label for="remember-me" class="checkbox-inline">Remember me</label>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Proceed</button>
             <%--<span style =color:#f0ffff>--%>

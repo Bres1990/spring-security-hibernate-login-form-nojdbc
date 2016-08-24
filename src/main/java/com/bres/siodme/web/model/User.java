@@ -20,17 +20,15 @@ public class User {
     private String username;
 
     @Column(name = "password")
-    @Size(min=8, max=32, message="Password must fit between 8 and 32 letters") @NotEmpty
+    @Size(min=8, max=60, message="Password must fit between 8 and 60 letters") @NotEmpty
     private String password;
-
-    private String passwordConfirm;
 
     @Column(name = "role")
     private String role;
 
     protected User() {};
 
-    public User(String username, String password) {
+    public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;

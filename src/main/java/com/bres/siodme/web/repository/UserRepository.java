@@ -4,6 +4,7 @@ import com.bres.siodme.web.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "SELECT * FROM USERS WHERE USERNAME = ?1 AND ID <= 3" , nativeQuery = true)
+    @Query(value = "SELECT * FROM USERS WHERE USERNAME = ?1" , nativeQuery = true)
     User findByUsername(String username);
-
-    @Modifying
-    @Transactional
-    @Query(value = "UPDATE USERS u SET u.password = ?2 WHERE u.username = ?1", nativeQuery = true)
-    User updateUser(String username, String password);
 }

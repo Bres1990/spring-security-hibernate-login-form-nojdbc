@@ -5,12 +5,9 @@ package com.bres.siodme.config;
  */
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -38,13 +35,9 @@ import javax.sql.DataSource;
 @EnableSpringDataWebSupport
 @EnableJpaRepositories("com.bres.siodme.web.repository")
 @EnableTransactionManagement
-//@PropertySource("classpath:application.properties")
 @Configuration
 @ComponentScan("com.bres.siodme")
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
-
-    @Autowired
-    private Environment env;
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -57,13 +50,6 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         viewResolver.setPrefix("/WEB-INF/view/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
-    }
-
-    @Bean
-    public ReloadableResourceBundleMessageSource messageSource() {
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("validation");
-        return messageSource;
     }
 
     @Bean

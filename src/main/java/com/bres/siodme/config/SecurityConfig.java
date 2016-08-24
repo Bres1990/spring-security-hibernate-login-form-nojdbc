@@ -5,6 +5,7 @@ package com.bres.siodme.config;
  */
 
 import com.bres.siodme.web.security.MySimpleUrlAuthenticationSuccessHandler;
+import com.bres.siodme.web.security.MyUsernamePasswordAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,7 +17,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
@@ -37,12 +40,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean(name="bCryptPasswordEncoder")
     public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+        return bCryptPasswordEncoder;
     }
 
     @Bean(name="mySimpleUrlAuthenticationSuccessHandler")
     public MySimpleUrlAuthenticationSuccessHandler successHandler() {
         return new MySimpleUrlAuthenticationSuccessHandler();
+    }
+
+    @Bean(name = "myUsernamePasswordAuthenticationFilter")
+    public MyUsernamePasswordAuthenticationFilter authFilter() throws Exception {
+        MyUsernamePasswordAuthenticationFilter authFilter
+                = new MyUsernamePasswordAuthenticationFilter();
+        authFilter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/login", "POST"));
+        authFilter.setAuthenticationManager(authenticationManager());
+        authFilter.setAuthenticationSuccessHandler(successHandler());
+        authFilter.setUsernameParameter("username");
+        authFilter.setPasswordParameter("password");
+
+        return authFilter;
     }
 
     @Bean
@@ -53,8 +71,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests()
-                    .antMatchers("/login").hasRole("ANONYMOUS")
+        http
+                .addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class)
+                .authorizeRequests()
+                    .antMatchers("/login").permitAll()
                     .antMatchers("/admin").hasRole("ADMIN")
                     .antMatchers("/welcome").hasRole("USER")
                 .and().formLogin()
@@ -65,6 +85,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout()
                     .logoutSuccessUrl("/login?logout")
                 .and().csrf()
+                .and().rememberMe()
+                    .tokenValiditySeconds(86400) // user data stored in a cookie for 1 day
+                    .key("loginKey")
                 ;
     }
 
