@@ -17,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -50,6 +51,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new MySimpleUrlAuthenticationSuccessHandler();
     }
 
+    @Bean(name="mySimpleUrlAuthenticationFailureHandler")
+    public SimpleUrlAuthenticationFailureHandler failureHandler() {
+        SimpleUrlAuthenticationFailureHandler failureHandler = new SimpleUrlAuthenticationFailureHandler();
+        failureHandler.setDefaultFailureUrl("/login?error");
+
+        return failureHandler;
+    }
+
     @Bean(name = "myUsernamePasswordAuthenticationFilter")
     public MyUsernamePasswordAuthenticationFilter authFilter() throws Exception {
         MyUsernamePasswordAuthenticationFilter authFilter
@@ -79,15 +88,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/welcome").hasRole("USER")
                 .and().formLogin()
                     .loginPage("/login")
-                    .usernameParameter("username").passwordParameter("password")
-                    .successHandler(successHandler())
-                    .failureUrl("/login?error")
                 .and().logout()
                     .logoutSuccessUrl("/login?logout")
                 .and().csrf()
                 .and().rememberMe()
                     .tokenValiditySeconds(86400) // user data stored in a cookie for 1 day
-                    .key("loginKey")
                 ;
     }
 

@@ -27,6 +27,10 @@
         <spring-security-test.version>4.1.2.RELEASE</spring-security-test.version>
         <h2database.version>1.4.192</h2database.version>
         <spring-aop.version>4.2.5.RELEASE</spring-aop.version>
+        <apache-poi.version>3.14</apache-poi.version>
+        <dbunit.version>2.5.3</dbunit.version>
+        <selenium-java.version>2.53.1</selenium-java.version>
+        <selenium-firefox-driver.version>2.53.1</selenium-firefox-driver.version>
     </properties>
 
     <dependencies>
@@ -157,6 +161,26 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
             <version>${spring-aop.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${apache-poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>${dbunit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
+            <version>${selenium-firefox-driver.version}</version>
         </dependency>
 
     </dependencies>

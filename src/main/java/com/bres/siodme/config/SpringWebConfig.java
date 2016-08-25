@@ -52,7 +52,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
-    @Bean
+    @Bean(name = "myDataSource")
     public DataSource dataSource() {
         final EmbeddedDatabaseBuilder embeddedDatabaseBuilder = new EmbeddedDatabaseBuilder();
         return embeddedDatabaseBuilder.setType(EmbeddedDatabaseType.H2).build();
