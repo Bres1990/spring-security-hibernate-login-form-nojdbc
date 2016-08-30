@@ -17,12 +17,8 @@ import java.sql.SQLException;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class LoginController {
 
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) throws SQLException {
-
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+    public String login(Model model, String logout) throws SQLException {
 
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");

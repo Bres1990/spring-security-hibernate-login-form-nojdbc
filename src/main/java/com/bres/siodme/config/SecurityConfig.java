@@ -22,6 +22,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import javax.sql.DataSource;
+
 
 @Configuration
 @EnableWebSecurity
@@ -29,6 +31,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired private UserDetailsService userDetailsService;
+    @Autowired private DataSource myDataSource;
 
     @Autowired public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -91,8 +94,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout()
                     .logoutSuccessUrl("/login?logout")
                 .and().csrf()
-                .and().rememberMe()
-                    .tokenValiditySeconds(86400) // user data stored in a cookie for 1 day
                 ;
     }
 

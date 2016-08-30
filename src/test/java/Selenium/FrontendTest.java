@@ -28,9 +28,9 @@ public class FrontendTest extends SeleneseTestBase {
         loginAs("ADMINISTRATOR", "administration");
         selenium.open("/admin");
         selenium.waitForPageToLoad("3000");
-        verifyTrue(selenium.isTextPresent("ADMIN | Logout"));
+        assertTrue(selenium.isTextPresent("ADMIN | Logout"));
         logout();
-        verifyTrue(selenium.isTextPresent("You have been logged out successfully."));
+        assertTrue(selenium.isTextPresent("You have been logged out successfully."));
     }
 
     @Test
@@ -38,57 +38,57 @@ public class FrontendTest extends SeleneseTestBase {
         loginAs("username", "password");
         selenium.open("/welcome");
         selenium.waitForPageToLoad("3000");
-        verifyTrue(selenium.isTextPresent("Welcome username | Logout"));
+        assertTrue(selenium.isTextPresent("Welcome username | Logout"));
         logout();
-        verifyTrue(selenium.isTextPresent("You have been logged out successfully."));
+        assertTrue(selenium.isTextPresent("You have been logged out successfully."));
     }
 
     @Test
     public void shouldRejectLoggingWithEmptyForm() {
         loginAs("", "");
-        verifyTrue(selenium.isTextPresent("Username and password are required"));
+        assertTrue(selenium.isTextPresent("Username and password are required"));
     }
 
     @Test
     public void shouldRemindThatUsernameIsRequired() {
         loginAs("", "password");
-        verifyTrue(selenium.isTextPresent("Username is required"));
+        assertTrue(selenium.isTextPresent("Username is required"));
     }
 
     @Test
     public void shouldRemindThatPasswordIsRequired() {
         loginAs("username", "");
-        verifyTrue(selenium.isTextPresent("Password is required"));
+        assertTrue(selenium.isTextPresent("Password is required"));
     }
 
     @Test
     public void shouldHaveCheckboxSelected() {
         selenium.open("/login");
         selenium.waitForPageToLoad("3000");
-        verifyTrue(selenium.isTextPresent("Log in"));
+        assertTrue(selenium.isTextPresent("Log in"));
         selenium.click("name=remember-me");
-        verifyTrue(selenium.isChecked("name=remember-me"));
+        assertTrue(selenium.isChecked("name=remember-me"));
     }
 
     @Test
     public void shouldPreventUnauthenticatedUserFromAccessingWelcomePage() {
         selenium.open("/welcome");
-        verifyTrue(selenium.isTextPresent("Log in"));
-        verifyTrue(selenium.getTitle().contains("Log in"));
+        assertTrue(selenium.isTextPresent("Log in"));
+        assertTrue(selenium.getTitle().contains("Log in"));
     }
 
     @Test
     public void shouldPreventUnauthenticatedUserFromAccessingAdminPage() {
         selenium.open("/admin");
-        verifyTrue(selenium.isTextPresent("Log in"));
-        verifyTrue(selenium.getTitle().contains("Log in"));
+        assertTrue(selenium.isTextPresent("Log in"));
+        assertTrue(selenium.getTitle().contains("Log in"));
     }
 
     @Test
     public void shouldPreventUserFromAccessingAdminPage() {
         loginAs("username", "password");
         selenium.open("/admin");
-        verifyTrue(selenium.isTextPresent("Access is denied"));
+        assertTrue(selenium.isTextPresent("Access is denied"));
     }
 
     @After

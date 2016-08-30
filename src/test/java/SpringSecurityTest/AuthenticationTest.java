@@ -75,14 +75,4 @@ public class AuthenticationTest {
         ;
     }
 
-
-    @Test
-    public void shouldTestRememberMeTimeout() throws Exception {
-
-    }
-
-    @Test
-    public void shouldAssertThatFindByUsernameReturnsUniqueRecord() throws Exception {
-
-    }
 }
