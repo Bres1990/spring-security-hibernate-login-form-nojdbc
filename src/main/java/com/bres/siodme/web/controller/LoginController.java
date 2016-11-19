@@ -57,17 +57,33 @@ public class LoginController {
     @RequestMapping(value = "/data", method = RequestMethod.GET)
     public String confirmData(@Valid @ModelAttribute("transferData") User transferData,
                               BindingResult result,
+                              Principal principal,
                               Model model) {
         model.addAttribute("firstName", transferData.getFirstName());
         model.addAttribute("lastName", transferData.getLastName());
         model.addAttribute("address", transferData.getAddress());
         model.addAttribute("accountNo", transferData.getAccountNo());
-
+        userRepository.setFixedFirstNameFor(transferData.getFirstName(), principal.getName());
+        userRepository.setFixedLastNameFor(transferData.getLastName(), principal.getName());
+        userRepository.setFixedAddressFor(transferData.getAddress(), principal.getName());
+        userRepository.setFixedAccountNoFor(Integer.toString(transferData.getAccountNo()), principal.getName());
         return "data";
     }
 
-    @RequestMapping(value = "/transfer", method = RequestMethod.POST)
-    public String confirmTransfer() {
+    @RequestMapping(value = "/transfer", method = RequestMethod.GET)
+    public String confirmTransfer(Principal principal,
+                                  Model model) {
+        User transferData = userRepository.findByUsername(principal.getName());
+        model.addAttribute("firstName", userRepository.findByUsername(principal.getName()).getFirstName());
+        model.addAttribute("lastName", transferData.getLastName());
+        model.addAttribute("address", transferData.getAddress());
+        model.addAttribute("accountNo", transferData.getAccountNo());
         return "transfer";
+    }
+
+    @RequestMapping(value = "/history", method = RequestMethod.POST)
+    public String showHistory() {
+
+        return "history";
     }
 }

@@ -19,18 +19,22 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
 
     @Modifying
-    @Query(value = "UPDATE USER u SET u.first_name = ?1 WHERE u.username = ?2", nativeQuery = true)
+    @Transactional
+    @Query(value = "UPDATE USERS u SET u.first_name = ?1 WHERE u.username = ?2", nativeQuery = true)
     void setFixedFirstNameFor(String firstName, String username);
 
     @Modifying
-    @Query(value = "UPDATE USER u SET u.last_name = ?1 WHERE u.username = ?2", nativeQuery = true)
+    @Transactional
+    @Query(value = "UPDATE USERS u SET u.last_name = ?1 WHERE u.username = ?2", nativeQuery = true)
     void setFixedLastNameFor(String lastName, String username);
 
     @Modifying
-    @Query(value = "UPDATE USER u SET u.address = ?1 WHERE u.username = ?2", nativeQuery = true)
+    @Transactional
+    @Query(value = "UPDATE USERS u SET u.address = ?1 WHERE u.username = ?2", nativeQuery = true)
     void setFixedAddressFor(String address, String username);
 
     @Modifying
-    @Query(value = "UPDATE USER u SET u.account_no = ?1 WHERE u.username = ?2", nativeQuery = true)
+    @Transactional
+    @Query(value = "UPDATE USERS u SET u.account_no = ?1 WHERE u.username = ?2", nativeQuery = true)
     void setFixedAccountNoFor(String accountNo, String username);
 }

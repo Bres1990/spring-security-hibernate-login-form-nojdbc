@@ -20,7 +20,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Confirm data</title>
+    <title>Transfer confirmed</title>
+
 
     <link href="${contextPath}/resources/theme1/css/bootstrap.min.css" rel="stylesheet">
 
@@ -32,16 +33,22 @@
 </head>
 <body>
 <div class="container">
-
     <c:if test="${pageContext.request.userPrincipal.name != null}">
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
-
-        <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+        <form id="historyForm" method="POST" action="${contextPath}/history">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+        <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a> | <a onclick="document.forms['historyForm'].submit()">History</a></h2>
     </c:if>
-
-
+    <h3> Transfer confirmed for: </h3>
+    <br/>
+    <h4>First name: ${firstName}</h4>
+    <h4>Last name: ${lastName}</h4>
+    <h4>Address: ${address}</h4>
+    <h4>Account number: ${accountNo}</h4>
+    <br/>
 </div>
 
 <!-- /container -->

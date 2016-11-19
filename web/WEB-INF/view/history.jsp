@@ -20,7 +20,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Confirm data</title>
+    <title>Transfer confirmed</title>
+
 
     <link href="${contextPath}/resources/theme1/css/bootstrap.min.css" rel="stylesheet">
 
@@ -32,30 +33,19 @@
 </head>
 <body>
 <div class="container">
-
     <c:if test="${pageContext.request.userPrincipal.name != null}">
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
-
-        <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+        <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a> | <a onclick="document.forms['historyForm'].submit()">History</a></h2>
     </c:if>
-        <h3> Data confirmation </h3>
-        <br/>
-        <h4>First name: ${firstName}</h4>
-        <h4>Last name: ${lastName}</h4>
-        <h4>Address: ${address}</h4>
-        <h4>Account number: ${accountNo}</h4>
-        <br/>
-
-    <c:if test="${firstName != null}">
-        <form method="GET" action="${contextPath}/transfer" modelAttribute="transferData" id="transferData">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <button name="confirm_data" class="btn btn-lg btn-primary btn-block" type="submit">Confirm</button>
-        </form>
-    </c:if>
-
-
+    <h3> Transfer history </h3>
+    <br/>
+    <h4>First name: ${firstName}</h4>
+    <h4>Last name: ${lastName}</h4>
+    <h4>Address: ${address}</h4>
+    <h4>Account number: ${accountNo}</h4>
+    <br/>
 </div>
 
 <!-- /container -->
@@ -63,4 +53,5 @@
 <script src="${contextPath}/resources/theme1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
