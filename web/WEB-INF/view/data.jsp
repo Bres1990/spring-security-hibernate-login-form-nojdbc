@@ -20,7 +20,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Welcome</title>
+    <title>Confirm data</title>
 
     <link href="${contextPath}/resources/theme1/css/bootstrap.min.css" rel="stylesheet">
 
@@ -41,26 +41,15 @@
         <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
     </c:if>
 
-    <form method="GET" action="${contextPath}/data" modelAttribute="transferData" id="transferData">
-        <h2 class="form-heading">Cash transfer</h2>
+        <h4>First name: ${firstName}</h4>
+        <h4>Last name: ${lastName}</h4>
+        <h4>Address: ${address}</h4>
+        <h4>Account number: ${accountNo}</h4>
 
-        <div class="form-group ${error != null ? 'has-error' : ''}">
-            <span>${message}</span>
-            <input path="firstName" name="firstName" type="text" class="form-control" placeholder="First name"
-                   autofocus="true"/>
-            <input path="lastName" name="lastName" type="text" class="form-control" placeholder="Last name"/>
-            <input path="address" name="address" type="text" class="form-control" placeholder="Address"
-                   autofocus="true"/>
-            <br/>
-            <input path="accountNo" name="accountNo" type="text" class="form-control" placeholder="Account number"/>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <span>${error}</span>
+        <button name="confirm_data" class="btn btn-lg btn-primary btn-block" type="submit">Confirm</button>
 
-            <button name="transfer" class="btn btn-lg btn-primary btn-block" type="submit">Proceed</button>
-        </div>
-
-    </form>
 </div>
+
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/theme1/js/bootstrap.min.js"></script>

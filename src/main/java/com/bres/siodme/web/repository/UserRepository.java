@@ -12,11 +12,25 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by Adam on 2016-07-30.
  */
 
-/* In JPA you don't have to write the implementation of a repository interface */
-
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT * FROM USERS WHERE USERNAME = ?1" , nativeQuery = true)
     User findByUsername(String username);
+
+    @Modifying
+    @Query(value = "UPDATE USER u SET u.first_name = ?1 WHERE u.username = ?2", nativeQuery = true)
+    void setFixedFirstNameFor(String firstName, String username);
+
+    @Modifying
+    @Query(value = "UPDATE USER u SET u.last_name = ?1 WHERE u.username = ?2", nativeQuery = true)
+    void setFixedLastNameFor(String lastName, String username);
+
+    @Modifying
+    @Query(value = "UPDATE USER u SET u.address = ?1 WHERE u.username = ?2", nativeQuery = true)
+    void setFixedAddressFor(String address, String username);
+
+    @Modifying
+    @Query(value = "UPDATE USER u SET u.account_no = ?1 WHERE u.username = ?2", nativeQuery = true)
+    void setFixedAccountNoFor(String accountNo, String username);
 }
