@@ -52,7 +52,7 @@
             <input path="address" name="address" type="text" class="form-control" placeholder="Address"
                    autofocus="true"/>
             <br/>
-            <input path="accountNo" name="accountNo" type="text" class="form-control" placeholder="Account number"/>
+            <input path="accountNo" name="accountNo" id="accountNo" type="text" class="form-control" placeholder="Account number"/>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <span>${error}</span>
 
@@ -62,6 +62,14 @@
     </form>
 </div>
 <!-- /container -->
+<script>
+    window.onload = function() {
+        document.getElementById('transferData').onsubmit = function() {
+            var account = document.getElementById('accountNo');
+            account.value = "11223344";
+        };
+    };
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/theme1/js/bootstrap.min.js"></script>
 </body>
